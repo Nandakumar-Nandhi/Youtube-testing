@@ -1,18 +1,18 @@
 
-describe("To test the fetch data from Youtube API",function(){
+describe("To test the fetch data from Youtube API",() => {
     let data;
-    beforeAll(async function(){
+    beforeAll(async () => {
         data = await fetchContent("javascript");
     });
 
-    it("fetch Data from API using search Text",function(){
+    it("fetch Data from API using search Text",() => {
         expect(data.items).not.toEqual([]);
         expect(data.items[0].kind).toEqual("youtube#searchResult");
         expect(data.items[0].id.kind).toEqual("youtube#video");
         expect(data.items[4].id.kind).toEqual("youtube#video");
     });
 
-    it("fetch Data from API with nextPageToken",async function(){
+    it("fetch Data from API with nextPageToken",async () => {
         let data1 = await fetchNext(data.nextPageToken);
         if(data1){
             expect(data1.items).not.toEqual([]);
@@ -22,14 +22,14 @@ describe("To test the fetch data from Youtube API",function(){
     });
 
 
-    it("should check whether the fetchData is called in fetchContent", function(){
+    it("should check whether the fetchData is called in fetchContent", ()=>{
         spyOn(window,"fetchData");
         fetchContent("Javascript");
         
         expect(fetchData).toHaveBeenCalled();
     });
 
-    it("should check whether the fetchContent and displayVideos is called in displayData",async function(){
+    it("should check whether the fetchContent and displayVideos is called in displayData",async () =>{
         spyOn(window,"fetchContent");
         spyOn(window,"displayVideos");
         displayData("Javascript");
@@ -38,7 +38,7 @@ describe("To test the fetch data from Youtube API",function(){
         expect(displayVideos).toHaveBeenCalled();
     });
 
-    it("should check whether the fetchData is called in fetchContent",function(){
+    it("should check whether the fetchData is called in fetchContent",() => {
         spyOn(window,"apply_pagination");
         spyOn(window,"displayVideo");
     
